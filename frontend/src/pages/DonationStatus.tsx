@@ -68,10 +68,12 @@ const DonationStatus = () => {
           transition: "all 0.3s ease",
         }}
         onMouseEnter={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-2px)";
+          (e.currentTarget as HTMLButtonElement).style.transform =
+            "translateY(-2px)";
         }}
         onMouseLeave={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)";
+          (e.currentTarget as HTMLButtonElement).style.transform =
+            "translateY(0)";
         }}
       >
         🚪 Logout
@@ -129,7 +131,13 @@ const DonationStatus = () => {
                   : "Payment Pending"}
             </h2>
 
-            <p style={{ color: "#7a8ab3", fontSize: "16px", marginBottom: "30px" }}>
+            <p
+              style={{
+                color: "#7a8ab3",
+                fontSize: "16px",
+                marginBottom: "30px",
+              }}
+            >
               {donation.status === "SUCCESS"
                 ? "Thank you for your generous contribution!"
                 : donation.status === "FAILED"

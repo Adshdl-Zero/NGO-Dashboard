@@ -27,7 +27,9 @@ const UserDashboard = () => {
   const [donations, setDonations] = useState<Donation[]>([]);
   const [donationAmount, setDonationAmount] = useState("");
   const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState<"overview" | "donations">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "donations">(
+    "overview",
+  );
   const [registrationLoading, setRegistrationLoading] = useState(false);
   const [registrationData, setRegistrationData] = useState({
     phone: "",
@@ -124,7 +126,9 @@ const UserDashboard = () => {
     .filter((d) => d.status === "SUCCESS")
     .reduce((sum, d) => sum + d.amount, 0);
 
-  const successfulDonations = donations.filter((d) => d.status === "SUCCESS").length;
+  const successfulDonations = donations.filter(
+    (d) => d.status === "SUCCESS",
+  ).length;
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -141,7 +145,9 @@ const UserDashboard = () => {
       <div className="dashboard-sidebar">
         <div className="dashboard-logo">
           <div className="logo-icon">❤️</div>
-          <div className="logo-text">NGO<span className="highlight">Hub</span></div>
+          <div className="logo-text">
+            NGO<span className="highlight">Hub</span>
+          </div>
         </div>
 
         <nav className="sidebar-nav">
@@ -174,7 +180,9 @@ const UserDashboard = () => {
         <div className="dashboard-header">
           <div>
             <h1 className="header-title">Donor Dashboard</h1>
-            <p className="header-subtitle">Track your contributions and impact</p>
+            <p className="header-subtitle">
+              Track your contributions and impact
+            </p>
           </div>
           <div className="user-profile">
             <div className="user-avatar">{userInitial}</div>
@@ -190,10 +198,18 @@ const UserDashboard = () => {
               <div className="content-section" style={{ marginBottom: "40px" }}>
                 <h2 className="section-title">📋 Complete Your Profile</h2>
                 <p style={{ color: "#8b92a9", marginBottom: "24px" }}>
-                  Help us know you better by completing your registration information.
+                  Help us know you better by completing your registration
+                  information.
                 </p>
 
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "16px", marginBottom: "24px" }}>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+                    gap: "16px",
+                    marginBottom: "24px",
+                  }}
+                >
                   <div className="form-group">
                     <label className="form-label">Phone Number *</label>
                     <input
@@ -248,34 +264,133 @@ const UserDashboard = () => {
                   disabled={registrationLoading}
                   style={{ opacity: registrationLoading ? 0.6 : 1 }}
                 >
-                  {registrationLoading ? "Registering..." : "✓ Complete Registration"}
+                  {registrationLoading
+                    ? "Registering..."
+                    : "✓ Complete Registration"}
                 </button>
               </div>
             ) : (
               <div className="content-section" style={{ marginBottom: "40px" }}>
                 <h2 className="section-title">📋 Your Profile</h2>
 
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "20px" }}>
-                  <div style={{ padding: "20px", background: "rgba(0, 212, 255, 0.05)", borderRadius: "8px", border: "1px solid rgba(0, 212, 255, 0.2)" }}>
-                    <div style={{ fontSize: "12px", color: "#8b92a9", marginBottom: "8px", textTransform: "uppercase" }}>📱 Phone</div>
-                    <div style={{ fontSize: "16px", color: "#e8ebf0", fontWeight: "600" }}>{registration.phone}</div>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                    gap: "20px",
+                  }}
+                >
+                  <div
+                    style={{
+                      padding: "20px",
+                      background: "rgba(0, 212, 255, 0.05)",
+                      borderRadius: "8px",
+                      border: "1px solid rgba(0, 212, 255, 0.2)",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: "12px",
+                        color: "#8b92a9",
+                        marginBottom: "8px",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      📱 Phone
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "16px",
+                        color: "#e8ebf0",
+                        fontWeight: "600",
+                      }}
+                    >
+                      {registration.phone}
+                    </div>
                   </div>
 
-                  <div style={{ padding: "20px", background: "rgba(0, 212, 255, 0.05)", borderRadius: "8px", border: "1px solid rgba(0, 212, 255, 0.2)" }}>
-                    <div style={{ fontSize: "12px", color: "#8b92a9", marginBottom: "8px", textTransform: "uppercase" }}>🏠 Address</div>
-                    <div style={{ fontSize: "16px", color: "#e8ebf0", fontWeight: "600" }}>{registration.address}</div>
+                  <div
+                    style={{
+                      padding: "20px",
+                      background: "rgba(0, 212, 255, 0.05)",
+                      borderRadius: "8px",
+                      border: "1px solid rgba(0, 212, 255, 0.2)",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: "12px",
+                        color: "#8b92a9",
+                        marginBottom: "8px",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      🏠 Address
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "16px",
+                        color: "#e8ebf0",
+                        fontWeight: "600",
+                      }}
+                    >
+                      {registration.address}
+                    </div>
                   </div>
 
-                  <div style={{ padding: "20px", background: "rgba(0, 212, 255, 0.05)", borderRadius: "8px", border: "1px solid rgba(0, 212, 255, 0.2)" }}>
-                    <div style={{ fontSize: "12px", color: "#8b92a9", marginBottom: "8px", textTransform: "uppercase" }}>📅 Joined</div>
-                    <div style={{ fontSize: "16px", color: "#e8ebf0", fontWeight: "600" }}>{new Date(registration.createdAt).toLocaleDateString()}</div>
+                  <div
+                    style={{
+                      padding: "20px",
+                      background: "rgba(0, 212, 255, 0.05)",
+                      borderRadius: "8px",
+                      border: "1px solid rgba(0, 212, 255, 0.2)",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: "12px",
+                        color: "#8b92a9",
+                        marginBottom: "8px",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      📅 Joined
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "16px",
+                        color: "#e8ebf0",
+                        fontWeight: "600",
+                      }}
+                    >
+                      {new Date(registration.createdAt).toLocaleDateString()}
+                    </div>
                   </div>
                 </div>
 
                 {registration.additionalInfo && (
-                  <div style={{ marginTop: "20px", padding: "16px", background: "rgba(0, 212, 255, 0.05)", borderRadius: "8px", borderLeft: "3px solid #00d4ff" }}>
-                    <div style={{ fontSize: "12px", color: "#8b92a9", marginBottom: "8px", textTransform: "uppercase" }}>ℹ️ Additional Notes</div>
-                    <div style={{ color: "#e8ebf0" }}>{registration.additionalInfo}</div>
+                  <div
+                    style={{
+                      marginTop: "20px",
+                      padding: "16px",
+                      background: "rgba(0, 212, 255, 0.05)",
+                      borderRadius: "8px",
+                      borderLeft: "3px solid #00d4ff",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: "12px",
+                        color: "#8b92a9",
+                        marginBottom: "8px",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      ℹ️ Additional Notes
+                    </div>
+                    <div style={{ color: "#e8ebf0" }}>
+                      {registration.additionalInfo}
+                    </div>
                   </div>
                 )}
               </div>
@@ -285,25 +400,52 @@ const UserDashboard = () => {
             <div className="metrics-grid">
               <div className="metric-card">
                 <div className="metric-label">Total Donated</div>
-                <div className="metric-value">₹{(totalDonated / 1000).toFixed(1)}K</div>
-                <div className="metric-change">+₹{donations.length > 0 ? (totalDonated / donations.filter(d => d.status === "SUCCESS").length || 1).toFixed(0) : "0"} per donation</div>
+                <div className="metric-value">
+                  ₹{(totalDonated / 1000).toFixed(1)}K
+                </div>
+                <div className="metric-change">
+                  +₹
+                  {donations.length > 0
+                    ? (
+                        totalDonated /
+                          donations.filter((d) => d.status === "SUCCESS")
+                            .length || 1
+                      ).toFixed(0)
+                    : "0"}{" "}
+                  per donation
+                </div>
               </div>
 
               <div className="metric-card">
                 <div className="metric-label">Successful Donations</div>
                 <div className="metric-value">{successfulDonations}</div>
-                <div className="metric-change">{donations.length > 0 ? ((successfulDonations / donations.length) * 100).toFixed(0) : "0"}% success rate</div>
+                <div className="metric-change">
+                  {donations.length > 0
+                    ? ((successfulDonations / donations.length) * 100).toFixed(
+                        0,
+                      )
+                    : "0"}
+                  % success rate
+                </div>
               </div>
 
               <div className="metric-card">
                 <div className="metric-label">Total Transactions</div>
                 <div className="metric-value">{donations.length}</div>
-                <div className="metric-change">{donations.filter(d => d.status === "PENDING").length} pending</div>
+                <div className="metric-change">
+                  {donations.filter((d) => d.status === "PENDING").length}{" "}
+                  pending
+                </div>
               </div>
 
               <div className="metric-card">
                 <div className="metric-label">Average Donation</div>
-                <div className="metric-value">₹{donations.length > 0 ? (totalDonated / successfulDonations || 0).toFixed(0) : "0"}</div>
+                <div className="metric-value">
+                  ₹
+                  {donations.length > 0
+                    ? (totalDonated / successfulDonations || 0).toFixed(0)
+                    : "0"}
+                </div>
                 <div className="metric-change">Your typical gift size</div>
               </div>
             </div>
@@ -312,10 +454,17 @@ const UserDashboard = () => {
             <div className="content-section">
               <h2 className="section-title">💰 Make a Donation</h2>
               <p style={{ color: "#8b92a9", marginBottom: "24px" }}>
-                Your contribution directly supports our mission. Every rupee helps us create lasting change.
+                Your contribution directly supports our mission. Every rupee
+                helps us create lasting change.
               </p>
 
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr",
+                  gap: "20px",
+                }}
+              >
                 <div>
                   <label className="form-label">Donation Amount (₹) *</label>
                   <input
@@ -328,7 +477,13 @@ const UserDashboard = () => {
                   />
                 </div>
 
-                <div style={{ display: "flex", gap: "8px", alignItems: "flex-end" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "8px",
+                    alignItems: "flex-end",
+                  }}
+                >
                   <button
                     className="btn btn-primary"
                     onClick={handleDonate}
@@ -340,9 +495,18 @@ const UserDashboard = () => {
                 </div>
               </div>
 
-              <div style={{ marginTop: "16px", padding: "12px 16px", background: "rgba(74, 222, 128, 0.05)", borderRadius: "6px", border: "1px solid rgba(74, 222, 128, 0.2)" }}>
+              <div
+                style={{
+                  marginTop: "16px",
+                  padding: "12px 16px",
+                  background: "rgba(74, 222, 128, 0.05)",
+                  borderRadius: "6px",
+                  border: "1px solid rgba(74, 222, 128, 0.2)",
+                }}
+              >
                 <p style={{ fontSize: "13px", color: "#4ade80", margin: "0" }}>
-                  ✓ Secure payment through PayHere | ✓ Your contribution is tax-deductible
+                  ✓ Secure payment through PayHere | ✓ Your contribution is
+                  tax-deductible
                 </p>
               </div>
             </div>
@@ -356,14 +520,23 @@ const UserDashboard = () => {
             <div className="metrics-grid">
               <div className="metric-card">
                 <div className="metric-label">💚 Total Contribution</div>
-                <div className="metric-value">₹{(totalDonated / 100000).toFixed(2)}L</div>
+                <div className="metric-value">
+                  ₹{(totalDonated / 100000).toFixed(2)}L
+                </div>
                 <div className="metric-change">Your impact</div>
               </div>
 
               <div className="metric-card">
                 <div className="metric-label">✓ Successful Gifts</div>
                 <div className="metric-value">{successfulDonations}</div>
-                <div className="metric-change">{donations.length > 0 ? ((successfulDonations / donations.length) * 100).toFixed(0) : "0"}% success</div>
+                <div className="metric-change">
+                  {donations.length > 0
+                    ? ((successfulDonations / donations.length) * 100).toFixed(
+                        0,
+                      )
+                    : "0"}
+                  % success
+                </div>
               </div>
             </div>
 
@@ -385,16 +558,34 @@ const UserDashboard = () => {
                     <tbody>
                       {donations.map((donation) => (
                         <tr key={donation.id}>
-                          <td style={{ fontWeight: "600", color: "#00d4ff", fontSize: "16px" }}>
+                          <td
+                            style={{
+                              fontWeight: "600",
+                              color: "#00d4ff",
+                              fontSize: "16px",
+                            }}
+                          >
                             ₹{donation.amount}
                           </td>
                           <td>
-                            <span className={`status-badge ${donation.status.toLowerCase()}`}>
-                              {donation.status === "SUCCESS" ? "✓ " : donation.status === "PENDING" ? "⏳ " : "✗ "}
+                            <span
+                              className={`status-badge ${donation.status.toLowerCase()}`}
+                            >
+                              {donation.status === "SUCCESS"
+                                ? "✓ "
+                                : donation.status === "PENDING"
+                                  ? "⏳ "
+                                  : "✗ "}
                               {donation.status}
                             </span>
                           </td>
-                          <td style={{ fontFamily: "monospace", fontSize: "12px", color: "#8b92a9" }}>
+                          <td
+                            style={{
+                              fontFamily: "monospace",
+                              fontSize: "12px",
+                              color: "#8b92a9",
+                            }}
+                          >
                             {donation.transactionId || "—"}
                           </td>
                           <td style={{ color: "#8b92a9", fontSize: "13px" }}>
@@ -409,7 +600,9 @@ const UserDashboard = () => {
                 <div className="empty-state">
                   <div className="empty-state-icon">💝</div>
                   <div className="empty-state-text">No donations yet</div>
-                  <div className="empty-state-subtext">Make your first donation to make a difference</div>
+                  <div className="empty-state-subtext">
+                    Make your first donation to make a difference
+                  </div>
                   <button
                     className="btn btn-primary"
                     onClick={() => setActiveTab("overview")}

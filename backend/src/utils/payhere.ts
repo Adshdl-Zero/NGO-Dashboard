@@ -51,7 +51,12 @@ export const verifyPayHereSignature = (
   md5sig: string,
   merchantSecret: string,
 ): boolean => {
-  const hashStr = `${merchantId}${orderId}${amount}${currencyCode}${statusCode}${merchantSecret}`;
+  const secretHash = crypto
+    .createHash("md5")
+    .update(merchantSecret)
+    .digest("hex")
+    .toUpperCase();
+  const hashStr = `${merchantId}${orderId}${amount}${currencyCode}${statusCode}${secretHash}`;
   const expectedHash = crypto
     .createHash("md5")
     .update(hashStr)
@@ -100,6 +105,11 @@ export const generatePayHereChecksum = (
   request: PayHerePaymentRequest,
   merchantSecret: string,
 ): string => {
-  const hashStr = `${request.merchant_id}${request.order_id}${request.amount}${request.currency}${merchantSecret}`;
+  const secretHash = crypto
+    .createHash("md5")
+    .update(merchantSecret)
+    .digest("hex")
+    .toUpperCase();
+  const hashStr = `${request.merchant_id}${request.order_id}${request.amount}${request.currency}${secretHash}`;
   return crypto.createHash("md5").update(hashStr).digest("hex").toUpperCase();
 };

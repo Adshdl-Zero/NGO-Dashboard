@@ -2,7 +2,10 @@ import { Response } from "express";
 import prisma from "../utils/prisma";
 import { AuthRequest } from "../middlewares/authMiddleware";
 import { DonationStatus } from "../generated/prisma/client";
-import { createPayHereRequest, generatePayHereChecksum } from "../utils/payhere";
+import {
+  createPayHereRequest,
+  generatePayHereChecksum,
+} from "../utils/payhere";
 
 export const initiateDonation = async (req: AuthRequest, res: Response) => {
   try {
@@ -26,7 +29,6 @@ export const initiateDonation = async (req: AuthRequest, res: Response) => {
       },
     });
 
-    // Get user details for PayHere
     const userDetails = await prisma.user.findUnique({
       where: { id: user.id },
     });
@@ -35,11 +37,9 @@ export const initiateDonation = async (req: AuthRequest, res: Response) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Create PayHere payment request
     const merchantId = process.env.PAYHERE_MERCHANT_ID || "";
     const merchantSecret = process.env.PAYHERE_MERCHANT_SECRET || "";
-    const baseUrl =
-      process.env.BASE_URL || "http://localhost:5000";
+    const baseUrl = process.env.BASE_URL || "http://localhost:5000";
 
     const paymentRequest = createPayHereRequest(
       merchantId,
@@ -76,7 +76,6 @@ export const updateDonationStatus = async (req: AuthRequest, res: Response) => {
     const { order_id, payment_id, payhere_amount, status_code, md5sig } =
       req.body;
 
-    // Validate required fields
     if (!order_id || !status_code) {
       return res.status(400).json({ message: "Invalid payload" });
     }
@@ -90,7 +89,6 @@ export const updateDonationStatus = async (req: AuthRequest, res: Response) => {
       return res.status(404).json({ message: "Donation not found" });
     }
 
-    // Status code 2 = success, 0 = pending
     let newStatus: DonationStatus;
     if (status_code === "2") {
       newStatus = DonationStatus.SUCCESS;
@@ -100,11 +98,8 @@ export const updateDonationStatus = async (req: AuthRequest, res: Response) => {
       newStatus = DonationStatus.PENDING;
     }
 
-    // Verify signature if provided (optional for development)
     if (md5sig && process.env.PAYHERE_MERCHANT_SECRET) {
-      const { verifyPayHereSignature } = await import(
-        "../utils/payhere"
-      );
+      const { verifyPayHereSignature } = await import("../utils/payhere");
       const merchantId = process.env.PAYHERE_MERCHANT_ID || "";
       const merchantSecret = process.env.PAYHERE_MERCHANT_SECRET;
 
@@ -120,7 +115,6 @@ export const updateDonationStatus = async (req: AuthRequest, res: Response) => {
 
       if (!isValid) {
         console.warn(`Invalid PayHere signature for order ${order_id}`);
-        // Don't fail the request, PayHere needs a 200 response
       }
     }
 
@@ -170,7 +164,6 @@ export const paymentReturn = async (req: any, res: Response) => {
       return res.status(400).json({ message: "Invalid order ID" });
     }
 
-    // Redirect to frontend with status
     const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
     res.redirect(`${frontendUrl}/donation-status?orderId=${order_id}`);
   } catch (err) {
@@ -190,7 +183,6 @@ export const paymentCancel = async (req: any, res: Response) => {
       });
     }
 
-    // Redirect to frontend with cancellation
     const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
     res.redirect(`${frontendUrl}/donation-cancelled`);
   } catch (err) {
@@ -201,7 +193,6 @@ export const paymentCancel = async (req: any, res: Response) => {
 
 export const paymentNotify = async (req: any, res: Response) => {
   try {
-    // This endpoint receives POST data from PayHere server
     const { order_id, payment_id, payhere_amount, status_code, md5sig } =
       req.body;
 
@@ -228,11 +219,8 @@ export const paymentNotify = async (req: any, res: Response) => {
       newStatus = DonationStatus.PENDING;
     }
 
-    // Verify signature if provided
     if (md5sig && process.env.PAYHERE_MERCHANT_SECRET) {
-      const { verifyPayHereSignature } = await import(
-        "../utils/payhere"
-      );
+      const { verifyPayHereSignature } = await import("../utils/payhere");
       const merchantId = process.env.PAYHERE_MERCHANT_ID || "";
       const merchantSecret = process.env.PAYHERE_MERCHANT_SECRET;
 
@@ -259,7 +247,6 @@ export const paymentNotify = async (req: any, res: Response) => {
       },
     });
 
-    // Return OK to PayHere
     res.send("OK");
   } catch (err) {
     console.error(err);
