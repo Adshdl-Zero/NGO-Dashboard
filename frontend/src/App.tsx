@@ -1,9 +1,12 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import UserDashboard from "./pages/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
+import DonationStatus from "./pages/DonationStatus";
+import DonationCancelled from "./pages/DonationCancelled";
 import ProtectedRoute from "./auth/ProtectedRoute";
+import "./styles/dashboard.css";
 
 function App() {
   return (
@@ -11,6 +14,17 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/donation-status" element={<DonationStatus />} />
+        <Route path="/donation-cancelled" element={<DonationCancelled />} />
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute role="USER">
+              <UserDashboard />
+            </ProtectedRoute>
+          }
+        />
 
         <Route
           path="/user"
@@ -29,6 +43,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
   );

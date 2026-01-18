@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://curly-space-chainsaw-r47rpjr4v5qvhpqjw-5000.app.github.dev/api",
 });
 
 // Attach JWT automatically

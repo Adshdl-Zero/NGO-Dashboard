@@ -49,11 +49,11 @@ const Register = () => {
     <div
       style={{
         width: "100%",
-        height: "100vh",
+        minHeight: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%)",
+        background: "linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%)",
         padding: "20px",
       }}
     >
@@ -61,37 +61,56 @@ const Register = () => {
         style={{
           width: "100%",
           maxWidth: "520px",
-          padding: "40px",
-          borderRadius: "12px",
-          background: "linear-gradient(135deg, #141928 0%, #1a2244 100%)",
-          border: "1px solid #2d3561",
-          boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+          padding: "50px",
+          borderRadius: "16px",
+          background: "linear-gradient(135deg, #161b28 0%, #1a1f2e 100%)",
+          border: "1px solid #2d3545",
+          boxShadow: "0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(0, 212, 255, 0.1)",
         }}
       >
-        <div style={{ textAlign: "center", marginBottom: "30px" }}>
+        <div style={{ textAlign: "center", marginBottom: "40px" }}>
+          <div
+            style={{
+              width: "60px",
+              height: "60px",
+              background: "linear-gradient(135deg, #00d4ff, #00f0ff)",
+              borderRadius: "12px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              margin: "0 auto 20px",
+              fontSize: "32px",
+            }}
+          >
+            📝
+          </div>
           <h1
             style={{
               fontSize: "32px",
+              fontWeight: "700",
               background: "linear-gradient(135deg, #00d4ff, #00f0ff)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
+              margin: "0 0 12px 0",
             }}
           >
             Create Account
           </h1>
-          <p style={{ color: "#7a8ab3", fontSize: "14px" }}>
-            Fill in your details
+          <p style={{ color: "#8b92a9", fontSize: "14px", margin: "0" }}>
+            Join our community of donors
           </p>
         </div>
 
         {error && (
           <div
             style={{
-              padding: "12px",
+              padding: "12px 16px",
               marginBottom: "20px",
-              backgroundColor: "#3d2d2d",
-              color: "#ff6b6b",
-              borderRadius: "6px",
+              backgroundColor: "rgba(239, 68, 68, 0.1)",
+              color: "#ef4444",
+              borderRadius: "8px",
+              border: "1px solid rgba(239, 68, 68, 0.3)",
+              fontSize: "14px",
               textAlign: "center",
             }}
           >
@@ -99,55 +118,156 @@ const Register = () => {
           </div>
         )}
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-          <input
-            placeholder="Full Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+        <div style={{ display: "flex", flexDirection: "column", gap: "16px", marginBottom: "24px" }}>
+          <div>
+            <label style={{ fontSize: "12px", color: "#8b92a9", marginBottom: "6px", display: "block", fontWeight: "600" }}>
+              Full Name *
+            </label>
+            <input
+              type="text"
+              placeholder="John Doe"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "12px 16px",
+                fontSize: "14px",
+                background: "rgba(255, 255, 255, 0.02)",
+                border: "1px solid #2d3545",
+                borderRadius: "8px",
+                color: "#e8ebf0",
+              }}
+            />
+          </div>
 
-          <input
-            type="tel"
-            placeholder="Phone (optional)"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
+          <div>
+            <label style={{ fontSize: "12px", color: "#8b92a9", marginBottom: "6px", display: "block", fontWeight: "600" }}>
+              Email *
+            </label>
+            <input
+              type="email"
+              placeholder="john@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "12px 16px",
+                fontSize: "14px",
+                background: "rgba(255, 255, 255, 0.02)",
+                border: "1px solid #2d3545",
+                borderRadius: "8px",
+                color: "#e8ebf0",
+              }}
+            />
+          </div>
 
-          <input
-            placeholder="Address (optional)"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
+          <div>
+            <label style={{ fontSize: "12px", color: "#8b92a9", marginBottom: "6px", display: "block", fontWeight: "600" }}>
+              Password *
+            </label>
+            <input
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "12px 16px",
+                fontSize: "14px",
+                background: "rgba(255, 255, 255, 0.02)",
+                border: "1px solid #2d3545",
+                borderRadius: "8px",
+                color: "#e8ebf0",
+              }}
+            />
+          </div>
 
-          <textarea
-            placeholder="Additional Info (optional)"
-            value={additionalInfo}
-            onChange={(e) => setAdditionalInfo(e.target.value)}
-            rows={3}
-            style={{
-              padding: "12px 16px",
-              fontSize: "14px",
-              borderRadius: "6px",
-              resize: "none",
-            }}
-          />
+          <div>
+            <label style={{ fontSize: "12px", color: "#8b92a9", marginBottom: "6px", display: "block", fontWeight: "600" }}>
+              Phone
+            </label>
+            <input
+              type="tel"
+              placeholder="+1 (555) 000-0000"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "12px 16px",
+                fontSize: "14px",
+                background: "rgba(255, 255, 255, 0.02)",
+                border: "1px solid #2d3545",
+                borderRadius: "8px",
+                color: "#e8ebf0",
+              }}
+            />
+          </div>
 
-          <select value={role} onChange={(e) => setRole(e.target.value)}>
-            <option value="USER">User</option>
-            <option value="ADMIN">Admin</option>
-          </select>
+          <div>
+            <label style={{ fontSize: "12px", color: "#8b92a9", marginBottom: "6px", display: "block", fontWeight: "600" }}>
+              Address
+            </label>
+            <input
+              type="text"
+              placeholder="123 Main St, City, Country"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "12px 16px",
+                fontSize: "14px",
+                background: "rgba(255, 255, 255, 0.02)",
+                border: "1px solid #2d3545",
+                borderRadius: "8px",
+                color: "#e8ebf0",
+              }}
+            />
+          </div>
+
+          <div>
+            <label style={{ fontSize: "12px", color: "#8b92a9", marginBottom: "6px", display: "block", fontWeight: "600" }}>
+              Account Type
+            </label>
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              style={{
+                width: "100%",
+                padding: "12px 16px",
+                fontSize: "14px",
+                background: "rgba(255, 255, 255, 0.02)",
+                border: "1px solid #2d3545",
+                borderRadius: "8px",
+                color: "#e8ebf0",
+              }}
+            >
+              <option value="USER">Donor</option>
+              <option value="ADMIN">Administrator</option>
+            </select>
+          </div>
+
+          <div>
+            <label style={{ fontSize: "12px", color: "#8b92a9", marginBottom: "6px", display: "block", fontWeight: "600" }}>
+              Additional Information
+            </label>
+            <textarea
+              placeholder="Tell us more about yourself (optional)"
+              value={additionalInfo}
+              onChange={(e) => setAdditionalInfo(e.target.value)}
+              rows={3}
+              style={{
+                width: "100%",
+                padding: "12px 16px",
+                fontSize: "14px",
+                borderRadius: "8px",
+                background: "rgba(255, 255, 255, 0.02)",
+                border: "1px solid #2d3545",
+                color: "#e8ebf0",
+                resize: "vertical",
+                fontFamily: "inherit",
+              }}
+            />
+          </div>
         </div>
 
         <button
@@ -155,16 +275,29 @@ const Register = () => {
           disabled={loading}
           style={{
             width: "100%",
-            marginTop: "20px",
-            padding: "12px",
-            fontWeight: 600,
-            background: "#00d4ff",
-            borderRadius: "8px",
+            padding: "12px 16px",
+            fontWeight: "600",
+            background: "linear-gradient(135deg, #00d4ff 0%, #00f0ff 100%)",
+            color: "#0f1419",
             border: "none",
+            borderRadius: "8px",
             cursor: loading ? "not-allowed" : "pointer",
+            fontSize: "16px",
+            opacity: loading ? 0.6 : 1,
+            transition: "all 0.3s ease",
+          }}
+          onMouseEnter={(e) => {
+            if (!loading) {
+              (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-2px)";
+              (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 0 30px rgba(0, 212, 255, 0.4)";
+            }
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)";
+            (e.currentTarget as HTMLButtonElement).style.boxShadow = "none";
           }}
         >
-          {loading ? "Creating Account..." : "Sign Up"}
+          {loading ? "Creating Account..." : "Create Account"}
         </button>
 
         <button
@@ -172,11 +305,23 @@ const Register = () => {
           style={{
             width: "100%",
             marginTop: "12px",
-            padding: "12px",
+            padding: "12px 16px",
             background: "transparent",
             color: "#00d4ff",
-            border: "2px solid #00d4ff",
+            border: "1px solid rgba(0, 212, 255, 0.3)",
             borderRadius: "8px",
+            cursor: "pointer",
+            fontSize: "16px",
+            fontWeight: "600",
+            transition: "all 0.3s ease",
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.background = "rgba(0, 212, 255, 0.1)";
+            (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(0, 212, 255, 0.5)";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLButtonElement).style.background = "transparent";
+            (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(0, 212, 255, 0.3)";
           }}
         >
           Back to Login
